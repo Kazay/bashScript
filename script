@@ -1,0 +1,123 @@
+#! /bin/bash
+menu() {
+  select test in "Retourner au menu" "Quitter";
+  do
+    case $test in
+      "Retourner au menu" ) bash script.sh;;
+      "Quitter" ) exit O;;
+    esac
+  done
+}
+
+
+echo "Bienvenue sur l'application officielle de la $(tput setaf 1)Croix-Rouge Française.";
+echo "Elle vous permet de découvrir les premiers gestes à effectuer en cas de blessure."
+
+echo "Que voulez-vous faire?"
+
+#Déterminer le choix de l'utilisateur
+select menu in "Choisir le type de blessure" "Quitter";
+do
+  case $menu in
+    "Choisir le type de blessure" ) break;;
+    #Si l'utilisateur souhaite quitter l'application.
+    "Quitter" ) echo "Merci d'avoir utiliser notre application. A bientôt";exit 0;;
+  esac
+done
+
+echo "Nous allons vous poser quelques questions pour déterminer la nature de la blessure et vous conseiller les premiers soins à prodiguer.";
+echo "/!\ Avant toute chose, veuillez à bien vous laver les mains à l'eau et au savon /!\\"
+
+#Demande à l'utilisateur de sélectionner le type de blessure.
+choice="";
+select typeBlessure in "Plaie" "Hématome" "Piqûre" "Fracture" "Retourner au menu";
+do
+  case $typeBlessure in
+    Plaie ) choice="Plaie";break;;
+    Hématome ) choice="Hématome";break;;
+    Piqûre ) choice="Piqûre";break;;
+    Fracture ) choice="Fracture";break;;
+    "Retourner au menu" ) bash scriptCroixRouge.sh;;
+  esac
+done
+
+#Si l'utilisateur choisi une plaie.
+if [ "$choice" == "Plaie" ]
+then
+  echo "La peau protège l'ensemble du corps contre les agressions extérieures. C'est pourquoi toute plaie cutanée nécessite des soins rigoureux."
+  echo "L'objectif est d'arrêter les saignements, éviter les infections et favoriser une bonne cicatrisation."
+  echo "Vous pouvez soigner vous-même plusieurs types de plaies:"
+  select typeBlessure in "Eraflure" "Coupure" "Brûlure" "Retourner au menu";
+  do
+    case $typeBlessure in
+      Eraflure ) choice="Eraflure";break;;
+      Coupure ) choice="Coupure";break;;
+      Brûlure ) choice="Brûlure";break;;
+      "Retourner au menu" ) bash scriptCroixRouge.sh;;
+    esac
+  done
+  #L'utilisateur sélectionne l'éraflure.
+  if [ "$choice" == "Eraflure" ]
+  then
+    echo "Une éraflure saigne peu et guérissent le plus souvent sans séquelle."
+    printf "\n"
+    echo "-----------------------------"
+    echo "Comment soigner une éraflure?"
+    echo "-----------------------------"
+    printf "\n"
+    echo "Il suffit de désinfecter la zone touchée avec une compresse et un antiseptique."
+    printf "\n"
+    menu
+  fi
+  #L'utilisateur sélectionne une coupure.
+  if [ "$choice" == "Coupure" ]
+  then
+    echo "Dans le cas d'un coupure simple, peu profonde et peu étendue, vous pouvez la traiter directement à domicile."
+    printf "\n"
+    echo "-----------------------------"
+    echo "Comment soigner une coupure?"
+    echo "-----------------------------"
+    printf "\n"
+    echo "1. Pour ôter le sang et les salissures, passez la plaie sous un filet d’eau à température ambiante."
+    echo "2. Désinfectez la plaie du centre vers l’extérieur, avec une compresse et un antiseptique."
+    echo "3. Recouvrez la plaie d’un pansement adhésif prêt à l’emploi. Cela favorise la cicatrisation en maintenant la peau humide."
+    printf "\n"
+    echo "En cas d'une coupure profonde et/ou étendue, veuillez consulter les urgences au plus vite."
+    printf "\n"
+    menu
+  fi
+  #L'utilisateur sélectionne une brûlure.
+  if [ "$choice" == "Brûlure" ]
+  then
+    echo "Dans le cas d'un coupure simple, peu profonde et peu étendue, vous pouvez la traiter directement à domicile."
+    printf "\n"
+    echo "-----------------------------"
+    echo "Comment soigner une coupure?"
+    echo "-----------------------------"
+    printf "\n"
+    echo "1. Pour ôter le sang et les salissures, passez la plaie sous un filet d’eau à température ambiante."
+    echo "2. Désinfectez la plaie du centre vers l’extérieur, avec une compresse et un antiseptique."
+    echo "3. Recouvrez la plaie d’un pansement adhésif prêt à l’emploi. Cela favorise la cicatrisation en maintenant la peau humide."
+    printf "\n"
+    echo "En cas d'une coupure profonde et/ou étendue, veuillez consulter les urgences au plus vite."
+    printf "\n"
+    menu
+  fi
+else bash scriptCroixRouge.sh;
+fi
+
+
+
+
+
+#if [ "$choice" == "Hématome" ]
+#then
+
+
+#if [ "$choice" == "Piqûre" ]
+#then
+
+
+#if [ "$choice" == "Fracture" ]
+#then
+
